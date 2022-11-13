@@ -1,11 +1,11 @@
 import {
-  SafeAreaView, 
-  Text, 
-  StyleSheet, 
-  Image, 
-  View, 
-  TouchableOpacity, 
-  Dimensions, 
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  Image,
+  View,
+  TouchableOpacity,
+  Dimensions,
   ScrollView
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
@@ -17,7 +17,6 @@ import checked from '../assets/checked.png'
 import line from '../assets/line.png'
 
 export default function OrderRecord({ route, navigation }) {
-
   const [order, setOrder] = useState([]);
 
   const [dataItem, setDataItem] = useState()
@@ -40,7 +39,7 @@ export default function OrderRecord({ route, navigation }) {
     const url = route.params.baseUrl + '/OrdersHistory/GetElderHistory?' + new URLSearchParams({
       ElderId: route.params.userID
     });
-    fetch(url, { method: 'GET'})
+    fetch(url, { method: 'GET' })
       .then((response) => response.json())
       .then((responseData) => {
         // console.log(responseData);
@@ -57,44 +56,44 @@ export default function OrderRecord({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} style={{width: Math.round(Dimensions.get('window').width), paddingHorizontal: 25}}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{ width: Math.round(Dimensions.get('window').width), paddingHorizontal: 25 }}>
         <View style={styles.header}>
           {/* <TouchableOpacity onPress={getData} > */}
-            <Text style={styles.pageTitle}>歷史訂單</Text>
+          <Text style={styles.pageTitle}>歷史訂單</Text>
           {/* </TouchableOpacity> */}
-          <Text>{dataItem}</Text> 
+          <Text>{dataItem}</Text>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image source={home} style={styles.homeIcon} />
           </TouchableOpacity>
         </View>
-        <View style={{height: 20}}></View>
+        <View style={{ height: 20 }}></View>
 
         {order.map((type, index) => {
-          return(
+          return (
             <View key={index} style={styles.recordCard}>
               <Text key={index} style={styles.recordTitle}>{type.exeTime.substring(5, 7)}月{type.exeTime.substring(8, 10)}日  |  {type.exeTime.substring(11, 16)}</Text>
-              <View style={{flexDirection: "row", marginLeft: 10}}>
-                <Image source={checked} style={styles.recordIcon}/>
+              <View style={{ flexDirection: "row", marginLeft: 10 }}>
+                <Image source={checked} style={styles.recordIcon} />
                 <Text style={styles.recordText}>{type.mainType} → {type.typeDetail}</Text>
               </View>
-              <Image source={line} style={styles.divider}/>
-              <View style={{flexDirection: "row", marginLeft: 10}}>
-                <Image source={address} style={styles.recordIcon}/>
+              <Image source={line} style={styles.divider} />
+              <View style={{ flexDirection: "row", marginLeft: 10 }}>
+                <Image source={address} style={styles.recordIcon} />
                 <Text style={styles.recordText}>{type.place === "" ? "預設地址" : type.place}</Text>
               </View>
-              <Image source={line} style={styles.divider}/>
-              <View style={{flexDirection: "row", marginLeft: 10}}>
-                <Image source={status} style={styles.recordIcon}/>
-                <Text 
+              <Image source={line} style={styles.divider} />
+              <View style={{ flexDirection: "row", marginLeft: 10 }}>
+                <Image source={status} style={styles.recordIcon} />
+                <Text
                   style={[
-                    styles.recordText, 
-                    {color: type.statu === 0 ? '#cc6849' : type.statu === 2 ? '#ece6c2' : '#52784c'}
+                    styles.recordText,
+                    { color: type.statu === 0 ? '#cc6849' : type.statu === 2 ? '#ece6c2' : '#52784c' }
                   ]}
                 >
                   {type.statu === 0 ? '已下單' : type.statu === 2 ? '進行中' : '已完成'}
                 </Text>
               </View>
-              <View style={{height: 5}}></View>
+              <View style={{ height: 5 }}></View>
             </View>
           )
         })}
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ece6c2'
   },
   header: {
-    flexDirection: "row", 
+    flexDirection: "row",
     marginTop: 70,
     // backgroundColor: "black",
     justifyContent: "space-between",
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
     width: Math.round(Dimensions.get('window').width) - 55,
   },
   pageTitle: {
-    fontSize: 35, 
+    fontSize: 35,
     fontWeight: "bold",
     fontFamily: "Avenir Next",
     color: "#6f5643",

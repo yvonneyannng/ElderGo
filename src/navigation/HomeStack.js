@@ -2,8 +2,8 @@ import { withInAppNotification } from '@chatkitty/react-native-in-app-notificati
 import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
-import React, { useEffect,useState } from 'react';
-import { Platform,View, Text, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Platform, View, Text, Button } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
 import Tooltip from "react-native-walkthrough-tooltip";
@@ -30,6 +30,8 @@ import ServiceList from '../ElderScreens/ServiceList';
 import OrderDetail from '../ElderScreens/OrderDetail';
 import Chat from '../ElderScreens/Chat';
 import OrderRecord from '../ElderScreens/OrderRecord';
+import GameStart from '../GameScreens/GameStart';
+import GameScreen from '../GameScreens/Game';
 
 // ================= screens for volunteer ================= //
 import VolunteerHome from '../VolunteerScreens/VolunteerHome';
@@ -69,7 +71,7 @@ export default function HomeStack() {
 
 function ChatComponent({ navigation, showNotification }) {
   const [showTip, setTip] = useState(true);
-  
+
   const [shouldShowGifhy, setShouldShowGifhy] = useState(false);
   useEffect(() => {
     return kitty.onNotificationReceived((notification) => {
@@ -90,8 +92,8 @@ function ChatComponent({ navigation, showNotification }) {
     });
   }, [navigation, showNotification]);
 
-  const url = "https://cab5-2001-b011-800c-146b-c461-7c30-3e16-f28c.jp.ngrok.io"
-  
+  const url = "https://d4ef-2001-b011-800c-16eb-c0a2-9ffd-d7ba-7825.jp.ngrok.io"
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -102,21 +104,21 @@ function ChatComponent({ navigation, showNotification }) {
     >
       {/* <Stack.Screen name="SignIn" component={SignIn} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
       <Stack.Screen name="SignUp" component={SignUp} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/> */}
-      <Stack.Screen name="Home" component={Home} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="VolunteerHome" component={VolunteerHome} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="ServiceRoot" component={ServiceRoot} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="ServiceType" component={ServiceType} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="ServiceList" component={ServiceList} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="OrderDetail" component={OrderDetail} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="OrderRecord" component={OrderRecord} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="UnpickedOrders" component={UnpickedOrders} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="ServiceDetail" component={ServiceDetail} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="ServiceRecord" component={ServiceRecord} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="RecordDetail" component={RecordDetail} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
-      <Stack.Screen name="Settings" component={Settings} initialParams={{ baseUrl: url }} options={{ headerShown: false }}/>
+      <Stack.Screen name="Home" component={Home} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="VolunteerHome" component={VolunteerHome} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="ServiceRoot" component={ServiceRoot} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="ServiceType" component={ServiceType} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="ServiceList" component={ServiceList} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="OrderDetail" component={OrderDetail} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="OrderRecord" component={OrderRecord} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="UnpickedOrders" component={UnpickedOrders} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="ServiceDetail" component={ServiceDetail} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="ServiceRecord" component={ServiceRecord} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="RecordDetail" component={RecordDetail} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="Settings" component={Settings} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
       <Stack.Screen name="聊天室" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="圖片DIY" component={PhotoHome} />
-      <Stack.Screen name="編輯圖片" component={PhotoEdit}/>
+      <Stack.Screen name="編輯圖片" component={PhotoEdit} />
       <Stack.Screen
         name="公共聊天室"
         component={BrowseChannelsScreen}
@@ -134,10 +136,12 @@ function ChatComponent({ navigation, showNotification }) {
       <Stack.Screen
         name="Chat"
         component={withInAppNotification(ChatScreen)}
-        options={ ({ route }) => ({
+        options={({ route }) => ({
           title: getChannelDisplayName(route.params.channel),
         })}
       />
+      <Stack.Screen name="紙牌遊戲" component={GameStart} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
+      <Stack.Screen name="Game" component={GameScreen} initialParams={{ baseUrl: url }} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

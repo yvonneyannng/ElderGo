@@ -1,13 +1,13 @@
-import { 
-  View, 
-  Text, 
+import {
+  View,
+  Text,
   StyleSheet,
-  SafeAreaView, 
-  TouchableOpacity, 
-  Image, 
-  Alert, 
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+  Alert,
   Dimensions,
-  ScrollView 
+  ScrollView
 } from 'react-native'
 import React, { useState, useContext } from 'react'
 import * as Linking from "expo-linking"
@@ -27,18 +27,18 @@ export default function Home({ route, navigation }) {
   console.log("elderID: " + route.params.msg)
 
   const [str, setStr] = useState([])
-  const getData = async () => {}
+  const getData = async () => { }
 
-  const {login, logout, loading} = useContext(AuthContext);
+  const { login, logout, loading } = useContext(AuthContext);
 
   // logout alert
   const logOut = () => {
     Alert.alert(
-      "確認", 
+      "確認",
       "是否要登出?",
       [
-        {text: "是", onPress: () => {logout(), navigation.navigate("SignIn")}},
-        {text: "否", onPress: () => console.log("No Pressed")}
+        { text: "是", onPress: () => { logout(), navigation.navigate("SignIn") } },
+        { text: "否", onPress: () => console.log("No Pressed") }
       ]
     )
   }
@@ -62,7 +62,7 @@ export default function Home({ route, navigation }) {
         <FunctionTab text="服務下訂" description="下訂想要使用的服務" screen="ServiceRoot" icon={service} id={elderID} />
         <FunctionTab text="歷史訂單" description="查看所有訂單記錄" screen="OrderRecord" icon={orders} id={elderID} />
         <FunctionTab text="聊天室" description="與他人互動" screen="聊天室" icon={chat} id={elderID} />
-        <FunctionTab text="遊戲" description="活動大腦" screen="Settings" icon={game} id={elderID} />
+        <FunctionTab text="遊戲" description="活動大腦" screen="紙牌遊戲" icon={game} id={elderID} />
         <FunctionTab text="設定" description="修改會員資料" screen="Settings" icon={settings} id={elderID} baseUrl={route.params.baseUrl} />
       </View>
     </View>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ece6c2',
   },
   header: {
-    flexDirection: "row", 
+    flexDirection: "row",
     marginTop: 65,
     // backgroundColor: "black",
     justifyContent: "space-between",
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     width: Math.round(Dimensions.get('window').width) - 55,
   },
   pageTitle: {
-    fontSize: 35, 
+    fontSize: 35,
     fontWeight: "bold",
     fontFamily: "Avenir Next",
     color: "#6f5643",
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   pageSubtitle: {
-    fontSize: 25, 
+    fontSize: 25,
     fontWeight: "600",
     marginTop: 18,
     marginLeft: 22,
